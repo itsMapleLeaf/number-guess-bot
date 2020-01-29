@@ -9,5 +9,5 @@ export function commandFromMessage(
     return { type: "start" }
   }
 
-  return { type: "guess", guess: Number(parts[0]) }
+  return { type: "guess", guess: Number(parts[0]), playerId: message.author.id }
 }

@@ -1,8 +1,14 @@
 import { randomRange } from "./randomRange"
 
-export type GameCommand = { type: "start" } | { type: "guess"; guess: number }
+export type GameCommand =
+  | { type: "start" }
+  | { type: "guess"; guess: number; playerId: string }
 
-export type GameResult = "newGame" | "tooHigh" | "tooLow" | "finish"
+export type GameResult =
+  | { type: "newGame" }
+  | { type: "tooHigh" }
+  | { type: "tooLow" }
+  | { type: "finish"; guessCounts: ReadonlyMap<string, number> }
 
 type GameState = {
   handleCommand(command: GameCommand): GameResult | undefined
@@ -26,26 +32,36 @@ class IdleState implements GameState {
   handleCommand(command: GameCommand): GameResult | undefined {
     if (command.type === "start") {
       this.game.setState(new RunningState(this.game))
-      return "newGame"
+      return { type: "newGame" }
     }
   }
 }
 
 class RunningState implements GameState {
   private number = randomRange(0, 100)
+  private guessCounts = new Map<string, number>()
 
   constructor(private game: Game) {}
 
   handleCommand(command: GameCommand): GameResult | undefined {
     if (command.type === "guess") {
-      const { guess } = command
+      const { guess, playerId } = command
       if (!this.isValidGuess(guess)) return
 
-      if (guess > this.number) return "tooHigh"
-      if (guess < this.number) return "tooLow"
+      const currentCount = this.guessCounts.get(playerId) ?? 0
+
+      if (guess > this.number) {
+        this.guessCounts.set(playerId, currentCount + 1)
+        return { type: "tooHigh" }
+      }
+
+      if (guess < this.number) {
+        this.guessCounts.set(playerId, currentCount + 1)
+        return { type: "tooLow" }
+      }
 
       this.game.setState(new IdleState(this.game))
-      return "finish"
+      return { type: "finish", guessCounts: this.guessCounts }
     }
   }
 

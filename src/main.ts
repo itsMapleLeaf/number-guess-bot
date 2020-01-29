@@ -9,7 +9,7 @@ function run() {
   const game = new Game()
 
   function runResult(result: GameResult, message: Eris.Message) {
-    switch (result) {
+    switch (result.type) {
       case "newGame":
         message.channel.createMessage(
           "new game! type a whole number from 0 to 100",
@@ -25,7 +25,12 @@ function run() {
         break
 
       case "finish":
-        sendWithMention(message, "nice! u got it")
+        const countsDisplay = [...result.guessCounts]
+          .sort(([, count1], [, count2]) => count2 - count1)
+          .map(([id, count]) => `<@${id}> had ${count} guesses`)
+          .join("\n")
+
+        sendWithMention(message, `nice! u got it\n\n${countsDisplay}`)
         break
     }
   }
