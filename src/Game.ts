@@ -38,18 +38,15 @@ class RunningState implements GameState {
 
   handleCommand(command: GameCommand): GameResult | undefined {
     if (command.type === "guess") {
-      return this.handleGuess(command.guess)
+      const { guess } = command
+      if (!this.isValidGuess(guess)) return
+
+      if (guess > this.number) return "tooHigh"
+      if (guess < this.number) return "tooLow"
+
+      this.game.setState(new IdleState(this.game))
+      return "finish"
     }
-  }
-
-  private handleGuess(guess: number): GameResult | undefined {
-    if (!this.isValidGuess(guess)) return
-
-    if (guess > this.number) return "tooHigh"
-    if (guess < this.number) return "tooLow"
-
-    this.game.setState(new IdleState(this.game))
-    return "finish"
   }
 
   private isValidGuess(guess: number) {
