@@ -5,7 +5,7 @@ export function commandFromMessage(
   message: Eris.Message,
 ): GameCommand | undefined {
   const parts = message.content.split(/\s+/)
-  if (parts[0] === "!start") {
+  if (parts[0] === "!numberguess") {
     return { type: "start" }
   }
 

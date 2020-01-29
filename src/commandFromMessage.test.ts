@@ -5,10 +5,10 @@ import { GameCommand } from "./Game"
 test("commandFromMessage", () => {
   const playerId = "0"
   const cases: [string, GameCommand][] = [
-    ["!start", { type: "start" }],
-    ["!start ", { type: "start" }],
-    ["!start      ", { type: "start" }],
-    ["!start\twhatever", { type: "start" }],
+    ["!numberguess", { type: "start" }],
+    ["!numberguess ", { type: "start" }],
+    ["!numberguess      ", { type: "start" }],
+    ["!numberguess\twhatever", { type: "start" }],
     ["anything", { type: "guess", guess: NaN, playerId }],
     ["else", { type: "guess", guess: NaN, playerId }],
     ["is a guess", { type: "guess", guess: NaN, playerId }],
