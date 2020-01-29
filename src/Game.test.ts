@@ -37,7 +37,6 @@ test("Game", () => {
       } else if (result === "tooHigh") {
         guess -= 1
       } else if (result === "finish") {
-        game.finish()
         break
       } else {
         fail(`did not get feedback, result was "${result}"`)
