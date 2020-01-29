@@ -5,54 +5,49 @@ test("Game", () => {
 
   function play() {
     // game should do nothing when idle
-    expect(game.handleCommand({ type: "guess", guess: 50 })).toEqual([])
+    expect(game.handleCommand({ type: "guess", guess: 50 })).toBeUndefined()
 
     // starts game
-    expect(game.handleCommand({ type: "start" })).toContainEqual({
-      type: "start",
-    })
-    game.start()
+    expect(game.handleCommand({ type: "start" })).toBe("newGame")
 
     // another start should do nothing
-    expect(game.handleCommand({ type: "start" })).toEqual([])
+    expect(game.handleCommand({ type: "start" })).toBeUndefined()
 
     // does nothing with invalid guesses
-    expect(game.handleCommand({ type: "guess", guess: 9999 })).toEqual([])
-    expect(game.handleCommand({ type: "guess", guess: -50 })).toEqual([])
-    expect(game.handleCommand({ type: "guess", guess: 0.5 })).toEqual([])
-    expect(game.handleCommand({ type: "guess", guess: NaN })).toEqual([])
-    expect(game.handleCommand({ type: "guess", guess: Infinity })).toEqual([])
-    expect(game.handleCommand({ type: "guess", guess: -Infinity })).toEqual([])
+    expect(game.handleCommand({ type: "guess", guess: 9999 })).toBeUndefined()
+    expect(game.handleCommand({ type: "guess", guess: -50 })).toBeUndefined()
+    expect(game.handleCommand({ type: "guess", guess: 0.5 })).toBeUndefined()
+    expect(game.handleCommand({ type: "guess", guess: NaN })).toBeUndefined()
+    expect(
+      game.handleCommand({ type: "guess", guess: Infinity }),
+    ).toBeUndefined()
+    expect(
+      game.handleCommand({ type: "guess", guess: -Infinity }),
+    ).toBeUndefined()
     expect(
       game.handleCommand({ type: "guess", guess: Number.MAX_VALUE }),
-    ).toEqual([])
+    ).toBeUndefined()
 
     // gameplay
     let guess = 50
     while (true) {
-      const results = game.handleCommand({ type: "guess", guess })
-      const reply = results.find((it) => it.type === "reply") as {
-        type: "reply"
-        text: string
-      }
-      expect(reply).toBeDefined()
-
-      if (reply.text.includes("too low")) {
+      const result = game.handleCommand({ type: "guess", guess })
+      if (result === "tooLow") {
         guess += 1
-      } else if (reply.text.includes("too high")) {
+      } else if (result === "tooHigh") {
         guess -= 1
-      } else if (results.some((it) => it.type === "finish")) {
+      } else if (result === "finish") {
         game.finish()
         break
       } else {
-        fail("did not receive appropriate game feedback")
+        fail(`did not get feedback, result was "${result}"`)
       }
     }
 
     // does nothing with more guesses
-    expect(game.handleCommand({ type: "guess", guess: 1 })).toEqual([])
-    expect(game.handleCommand({ type: "guess", guess: 2 })).toEqual([])
-    expect(game.handleCommand({ type: "guess", guess: 3 })).toEqual([])
+    expect(game.handleCommand({ type: "guess", guess: 1 })).toBeUndefined()
+    expect(game.handleCommand({ type: "guess", guess: 2 })).toBeUndefined()
+    expect(game.handleCommand({ type: "guess", guess: 3 })).toBeUndefined()
   }
 
   // make sure we can play multiple times

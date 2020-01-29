@@ -9,18 +9,23 @@ function run() {
   const game = new Game()
 
   function runResult(result: GameResult, message: Eris.Message) {
-    switch (result.type) {
-      case "message":
-        message.channel.createMessage(result.text)
+    switch (result) {
+      case "newGame":
+        message.channel.createMessage(
+          "new game! type a whole number from 0 to 100",
+        )
         break
-      case "reply":
-        sendWithMention(message, result.text)
+
+      case "tooHigh":
+        sendWithMention(message, "too high")
         break
-      case "start":
-        game.start()
+
+      case "tooLow":
+        sendWithMention(message, "too low")
         break
+
       case "finish":
-        game.finish()
+        sendWithMention(message, "nice! u got it")
         break
     }
   }
@@ -31,10 +36,8 @@ function run() {
     const command = commandFromMessage(message)
     if (!command) return
 
-    const results = game.handleCommand(command)
-    for (const result of results) {
-      runResult(result, message)
-    }
+    const result = game.handleCommand(command)
+    if (result) runResult(result, message)
   })
 
   return bot.connect()
