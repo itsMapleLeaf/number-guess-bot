@@ -47,7 +47,10 @@ function run() {
   }
 
   bot.on("ready", () => {
-    bot.editStatus("binary search lol")
+    bot.editStatus("online", {
+      name: "!numberguess <max>",
+      type: 2,
+    })
   })
 
   bot.on("messageCreate", (message) => {
