@@ -46,14 +46,16 @@ function run() {
     }
   }
 
-  bot.on("ready", () => console.log("ready"))
-
   bot.on("messageCreate", (message) => {
     const command = commandFromMessage(message)
     if (!command) return
 
     const result = game.handleCommand(command)
     if (result) runResult(result, message)
+  })
+
+  bot.on("error", (error) => {
+    console.error(error)
   })
 
   return bot.connect()
