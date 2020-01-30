@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "tsc && node build/main",
+    "build": "tsc",
+    "start": "node build/main",
     "dev": "ts-node-dev --no-notify --transpile-only src/main",
     "test": "jest"
   },
