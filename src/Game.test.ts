@@ -53,14 +53,17 @@ test("Game", () => {
 
     // gameplay
     let guess = Math.floor(maxNumber / 2)
+    let guessCount = 0
     while (true) {
       const result = game.handleCommand(guessCommand(guess))
+      guessCount += 1
 
       if (result?.type === "tooLow") {
         guess += 1
       } else if (result?.type === "tooHigh") {
         guess -= 1
       } else if (result?.type === "finish") {
+        expect(result.guessCounts.get("0")).toBe(guessCount)
         break
       } else {
         fail(`did not get feedback, result was "${result}"`)

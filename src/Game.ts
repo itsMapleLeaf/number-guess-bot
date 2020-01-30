@@ -66,17 +66,10 @@ class RunningState implements GameState {
       const { guess, playerId } = command
       if (!this.isValidGuess(guess)) return
 
-      const currentCount = this.guessCounts.get(playerId) ?? 0
+      this.guessCounts.set(playerId, (this.guessCounts.get(playerId) ?? 0) + 1)
 
-      if (guess > this.number) {
-        this.guessCounts.set(playerId, currentCount + 1)
-        return { type: "tooHigh" }
-      }
-
-      if (guess < this.number) {
-        this.guessCounts.set(playerId, currentCount + 1)
-        return { type: "tooLow" }
-      }
+      if (guess > this.number) return { type: "tooHigh" }
+      if (guess < this.number) return { type: "tooLow" }
 
       this.game.setState(new IdleState(this.game))
       return { type: "finish", guessCounts: this.guessCounts }
