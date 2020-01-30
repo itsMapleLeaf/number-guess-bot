@@ -12,7 +12,7 @@ function run() {
     switch (result.type) {
       case "newGame":
         message.channel.createMessage(
-          "new game! type a whole number from 0 to 100",
+          `new game! type a whole number from 1 to ${result.maxNumber}`,
         )
         break
 
@@ -31,6 +31,17 @@ function run() {
           .join("\n")
 
         sendWithMention(message, `nice! u got it\n\n${countsDisplay}`)
+        break
+
+      case "invalidMaxNumber":
+        sendWithMention(
+          message,
+          `invalid max number, must be from 2 to a billion`,
+        )
+        break
+
+      default:
+        console.error(`unhandled result ${result}`)
         break
     }
   }

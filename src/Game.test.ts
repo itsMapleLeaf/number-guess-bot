@@ -6,32 +6,56 @@ const guessCommand = (guess: number): GameCommand => ({
   playerId: "0",
 })
 
+const startCommand = (maxNumber: number): GameCommand => ({
+  type: "start",
+  maxNumber,
+})
+
 test("Game", () => {
   const game = new Game()
 
-  function play() {
+  function play(maxNumber = 100) {
     // game should do nothing when idle
     expect(game.handleCommand(guessCommand(50))).toBeUndefined()
 
+    // invalid starting numbers
+    const invalidNumberInputs = ["Infinity", "-Infinity", "NaN", "+0", "-0"]
+
+    for (const input of invalidNumberInputs) {
+      expect(game.handleCommand(startCommand(Number(input)))).toEqual({
+        type: "invalidMaxNumber",
+      })
+    }
+
     // starts game
-    expect(game.handleCommand({ type: "start" })).toEqual({ type: "newGame" })
+    expect(game.handleCommand(startCommand(maxNumber))).toEqual({
+      type: "newGame",
+      maxNumber,
+    })
 
     // another start should do nothing
-    expect(game.handleCommand({ type: "start" })).toBeUndefined()
+    expect(game.handleCommand(startCommand(maxNumber))).toBeUndefined()
 
     // does nothing with invalid guesses
-    expect(game.handleCommand(guessCommand(9999))).toBeUndefined()
-    expect(game.handleCommand(guessCommand(-50))).toBeUndefined()
-    expect(game.handleCommand(guessCommand(0.5))).toBeUndefined()
-    expect(game.handleCommand(guessCommand(NaN))).toBeUndefined()
-    expect(game.handleCommand(guessCommand(Infinity))).toBeUndefined()
-    expect(game.handleCommand(guessCommand(-Infinity))).toBeUndefined()
-    expect(game.handleCommand(guessCommand(Number.MAX_VALUE))).toBeUndefined()
+    const invalidGuesses = [
+      9999,
+      -50,
+      0.5,
+      NaN,
+      Infinity,
+      -Infinity,
+      Number.MAX_VALUE,
+    ]
+
+    for (const guess of invalidGuesses) {
+      expect(game.handleCommand(guessCommand(guess))).toBeUndefined()
+    }
 
     // gameplay
-    let guess = 50
+    let guess = Math.floor(maxNumber / 2)
     while (true) {
       const result = game.handleCommand(guessCommand(guess))
+
       if (result?.type === "tooLow") {
         guess += 1
       } else if (result?.type === "tooHigh") {
@@ -51,6 +75,6 @@ test("Game", () => {
 
   // make sure we can play multiple times
   play()
-  play()
-  play()
+  play(1000)
+  play(5)
 })

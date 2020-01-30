@@ -1,11 +1,12 @@
 import { randomRange } from "./randomRange"
 
 export type GameCommand =
-  | { type: "start" }
+  | { type: "start"; maxNumber?: number }
   | { type: "guess"; guess: number; playerId: string }
 
 export type GameResult =
-  | { type: "newGame" }
+  | { type: "invalidMaxNumber" }
+  | { type: "newGame"; maxNumber: number }
   | { type: "tooHigh" }
   | { type: "tooLow" }
   | { type: "finish"; guessCounts: ReadonlyMap<string, number> }
@@ -13,6 +14,8 @@ export type GameResult =
 type GameState = {
   handleCommand(command: GameCommand): GameResult | undefined
 }
+
+const defaultMaxNumber = 100
 
 export class Game {
   private state: GameState = new IdleState(this)
@@ -31,17 +34,32 @@ class IdleState implements GameState {
 
   handleCommand(command: GameCommand): GameResult | undefined {
     if (command.type === "start") {
-      this.game.setState(new RunningState(this.game))
-      return { type: "newGame" }
+      const { maxNumber = defaultMaxNumber } = command
+
+      const isValidMaxNumber =
+        Number.isInteger(maxNumber) &&
+        maxNumber >= 2 &&
+        maxNumber <= 1_000_000_000
+
+      if (!isValidMaxNumber) {
+        return { type: "invalidMaxNumber" }
+      }
+
+      this.game.setState(new RunningState(this.game, maxNumber))
+      return { type: "newGame", maxNumber }
     }
   }
 }
 
 class RunningState implements GameState {
-  private number = randomRange(0, 100)
-  private guessCounts = new Map<string, number>()
+  private readonly number: number
+  private readonly maxNumber: number
+  private readonly guessCounts = new Map<string, number>()
 
-  constructor(private game: Game) {}
+  constructor(private game: Game, maxNumber: number) {
+    this.number = randomRange(1, maxNumber + 1)
+    this.maxNumber = maxNumber
+  }
 
   handleCommand(command: GameCommand): GameResult | undefined {
     if (command.type === "guess") {
@@ -66,11 +84,6 @@ class RunningState implements GameState {
   }
 
   private isValidGuess(guess: number) {
-    return (
-      Number.isFinite(guess) &&
-      Number.isInteger(guess) &&
-      guess >= 0 &&
-      guess <= 100
-    )
+    return Number.isInteger(guess) && guess >= 1 && guess <= this.maxNumber
   }
 }
