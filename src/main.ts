@@ -46,6 +46,10 @@ function run() {
     }
   }
 
+  bot.on("ready", () => {
+    bot.editStatus("binary search lol")
+  })
+
   bot.on("messageCreate", (message) => {
     const command = commandFromMessage(message)
     if (!command) return
