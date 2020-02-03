@@ -88,11 +88,16 @@ const guessCommand: Command = {
   },
 }
 
+const prefixedCommands = {
+  condition: commandName("!"),
+  childCommands: [startCommand, quitCommand],
+}
+
 const bot = new Bot({
   token: process.env.BOT_TOKEN!,
   command: {
-    condition: commandName("!"),
-    childCommands: [startCommand, quitCommand, guessCommand],
+    condition: matchStatus("match"),
+    childCommands: [prefixedCommands, guessCommand],
   },
 })
 
