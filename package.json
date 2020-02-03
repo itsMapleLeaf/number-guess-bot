@@ -13,7 +13,7 @@
   "author": "kingdaro",
   "license": "ISC",
   "dependencies": {
-    "@crawron/griffon": "^0.0.1",
+    "@crawron/griffon": "^0.0.3",
     "dotenv": "^8.2.0",
     "eris": "^0.11.2"
   },
