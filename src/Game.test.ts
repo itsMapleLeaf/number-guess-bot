@@ -87,6 +87,8 @@ test("Game", () => {
     expect(game.handleCommand({ type: "quit" })).toStrictEqual<GameResult>({
       type: "quit",
     })
+
+    expect(game.handleCommand(guessCommand(50))).toBeUndefined()
   }
 
   // make sure we can play multiple times
