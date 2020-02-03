@@ -60,7 +60,10 @@ const startCommand: Command = {
   condition: commandName("numberguess"),
   action: (ctx) => {
     const args = parseArgs(ctx.args)
-    runCommand({ type: "start", maxNumber: Number(args[0]) }, ctx.message)
+    runCommand(
+      { type: "start", maxNumber: Number(args[0]) || 100 },
+      ctx.message,
+    )
   },
 }
 
