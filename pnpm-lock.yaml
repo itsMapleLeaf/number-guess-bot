@@ -3,10 +3,10 @@ dependencies:
   dotenv: 8.2.0
   eris: 0.11.2
 devDependencies:
-  '@types/jest': 25.1.0
-  '@types/node': 13.5.1
+  '@types/jest': 25.1.1
+  '@types/node': 13.7.0
   jest: 25.1.0
-  ts-jest: 25.0.0_jest@25.1.0
+  ts-jest: 25.1.0_jest@25.1.0
   ts-node-dev: 1.0.0-pre.44_typescript@3.7.5
   typescript: 3.7.5
 lockfileVersion: 5.1
@@ -408,16 +408,17 @@ packages:
     dev: true
     resolution:
       integrity: sha512-UpYjBi8xefVChsCoBpKShdxTllC9pwISirfoZsUa2AAdQg/Jd2KQGtSbw+ya7GPo7x/wAPlH6JBhKhAsXUEZNA==
-  /@types/jest/25.1.0:
+  /@types/jest/25.1.1:
     dependencies:
       jest-diff: 25.1.0
+      pretty-format: 25.1.0
     dev: true
     resolution:
-      integrity: sha512-MYX8LpNQboef1NDZQTchM5poL8WITRVG/4/1XLK/Xsamjptsvgb8ELTRoXixBARi+a81mMT4n2hooqaydEOE9A==
-  /@types/node/13.5.1:
+      integrity: sha512-bKSZJYZJLzwaoVYNN4W3A0RvKNYsrLm5tsuXaMlfYDxKf4gY2sFrMYneCugNQWGg1gjPW+FHBwNrwPzEi4sIsw==
+  /@types/node/13.7.0:
     dev: true
     resolution:
-      integrity: sha512-Jj2W7VWQ2uM83f8Ls5ON9adxN98MvyJsMSASYFuSvrov8RMRY64Ayay7KV35ph1TSGIJ2gG9ZVDdEq3c3zaydA==
+      integrity: sha512-GnZbirvmqZUzMgkFn70c74OQpTTUcCzlhQliTzYjQMqg+hVKcDnxdL19Ne3UdYzdMA/+W3eb646FWn/ZaT1NfQ==
   /@types/stack-utils/1.0.1:
     dev: true
     resolution:
@@ -3751,7 +3752,7 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-WIeWa7WCpFA6QetST301ARgVphM=
-  /ts-jest/25.0.0_jest@25.1.0:
+  /ts-jest/25.1.0_jest@25.1.0:
     dependencies:
       bs-logger: 0.2.6
       buffer-from: 1.1.1
@@ -3771,7 +3772,7 @@ packages:
     peerDependencies:
       jest: '>=25 <26'
     resolution:
-      integrity: sha512-F+hZg3j7XYOFpXJteXb4lnqy7vQzTmpTmX7AJT6pvSGeZejyXj1Lk0ArpnrEPOpv6Zu/NugHc5W7FINngC9WZQ==
+      integrity: sha512-1Lf576ulKhbxX5og+tG8udVg/5cgcMLPBxp1iCqbbf6VvUK4gEsgAtzMjl8u98izhLrzKMPB0LxCBKEZ5l19Hw==
   /ts-node-dev/1.0.0-pre.44_typescript@3.7.5:
     dependencies:
       dateformat: 1.0.12
@@ -4105,11 +4106,11 @@ packages:
       integrity: sha512-Ux4ygGWsu2c7isFWe8Yu1YluJmqVhxqK2cLXNQA5AcC3QfbGNpM7fu0Y8b/z16pXLnFxZYvWhd3fhBY9DLmC6Q==
 specifiers:
   '@crawron/griffon': ^0.0.3
-  '@types/jest': ^25.1.0
-  '@types/node': ^13.5.1
+  '@types/jest': ^25.1.1
+  '@types/node': ^13.7.0
   dotenv: ^8.2.0
   eris: ^0.11.2
   jest: ^25.1.0
-  ts-jest: ^25.0.0
+  ts-jest: ^25.1.0
   ts-node-dev: ^1.0.0-pre.44
   typescript: ^3.7.5
