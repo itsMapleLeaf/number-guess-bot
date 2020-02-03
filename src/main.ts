@@ -1,4 +1,10 @@
-import { Bot, Command, commandName, matchStatus } from "@crawron/griffon"
+import {
+  Bot,
+  Command,
+  CommandGroup,
+  commandName,
+  matchStatus,
+} from "@crawron/griffon"
 import "dotenv/config"
 import Eris from "eris"
 import { Game, GameCommand } from "./Game"
@@ -88,7 +94,7 @@ const guessCommand: Command = {
   },
 }
 
-const prefixedCommands = {
+const prefixedCommands: CommandGroup = {
   condition: commandName("!"),
   childCommands: [startCommand, quitCommand],
 }
