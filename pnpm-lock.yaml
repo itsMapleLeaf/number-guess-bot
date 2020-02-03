@@ -1,4 +1,5 @@
 dependencies:
+  '@crawron/griffon': npm.pkg.github.com/@Crawron/griffon/0.0.1_eris@0.11.2
   dotenv: 8.2.0
   eris: 0.11.2
 devDependencies:
@@ -4090,7 +4091,21 @@ packages:
       node: '>=6'
     resolution:
       integrity: sha512-Ux4ygGWsu2c7isFWe8Yu1YluJmqVhxqK2cLXNQA5AcC3QfbGNpM7fu0Y8b/z16pXLnFxZYvWhd3fhBY9DLmC6Q==
+  npm.pkg.github.com/@Crawron/griffon/0.0.1_eris@0.11.2:
+    dependencies:
+      eris: 0.11.2
+    dev: false
+    id: npm.pkg.github.com/@Crawron/griffon/0.0.1
+    name: '@Crawron/griffon'
+    peerDependencies:
+      eris: ^0.11.2
+    resolution:
+      integrity: sha512-YKFno8cMVVPjAYSQLxL+wbNIqfUG3b06TkNF5t5aiWTZaoPk9fGbGbqRZeGoamb1v6fiTDN1F0bR4xV71Y44WQ==
+      registry: 'https://npm.pkg.github.com/'
+      tarball: 'https://npm.pkg.github.com/download/@crawron/griffon/0.0.1/92cca74d2691e0a1f9bbe4314909cf1246a8c7af886aecb110105b777ea25963'
+    version: 0.0.1
 specifiers:
+  '@crawron/griffon': ^0.0.1
   '@types/jest': ^25.1.0
   '@types/node': ^13.5.1
   dotenv: ^8.2.0
