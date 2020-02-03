@@ -1,4 +1,4 @@
-import { Game, GameCommand } from "./Game"
+import { Game, GameCommand, GameResult } from "./Game"
 
 const guessCommand = (guess: number): GameCommand => ({
   type: "guess",
@@ -74,6 +74,19 @@ test("Game", () => {
     expect(game.handleCommand(guessCommand(1))).toBeUndefined()
     expect(game.handleCommand(guessCommand(2))).toBeUndefined()
     expect(game.handleCommand(guessCommand(3))).toBeUndefined()
+
+    // quit should do nothing in idle state
+    expect(game.handleCommand({ type: "quit" })).toBeUndefined()
+
+    // quit should stop the game when playing
+    expect(game.handleCommand({ type: "start" })).toStrictEqual<GameResult>({
+      type: "newGame",
+      maxNumber: expect.any(Number),
+    })
+
+    expect(game.handleCommand({ type: "quit" })).toStrictEqual<GameResult>({
+      type: "quit",
+    })
   }
 
   // make sure we can play multiple times

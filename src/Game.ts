@@ -2,6 +2,7 @@ import { randomRange } from "./randomRange"
 
 export type GameCommand =
   | { type: "start"; maxNumber?: number }
+  | { type: "quit" }
   | { type: "guess"; guess: number; playerId: string }
 
 export type GameResult =
@@ -10,6 +11,7 @@ export type GameResult =
   | { type: "tooHigh" }
   | { type: "tooLow" }
   | { type: "finish"; guessCounts: ReadonlyMap<string, number> }
+  | { type: "quit" }
 
 type GameState = {
   handleCommand(command: GameCommand): GameResult | undefined
@@ -62,6 +64,11 @@ class RunningState implements GameState {
   }
 
   handleCommand(command: GameCommand): GameResult | undefined {
+    if (command.type === "quit") {
+      this.game.setState(new IdleState(this.game))
+      return { type: "quit" }
+    }
+
     if (command.type === "guess") {
       const { guess, playerId } = command
       if (!this.isValidGuess(guess)) return
