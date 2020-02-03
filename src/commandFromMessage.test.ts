@@ -11,6 +11,8 @@ test("commandFromMessage", () => {
     ["!numberguess\twhatever", { type: "start", maxNumber: NaN }],
     ["!numberguess 1000", { type: "start", maxNumber: 1000 }],
     ["!numberguess     NaN", { type: "start", maxNumber: NaN }],
+    ["!quit", { type: "quit" }],
+    ["!quitt", { type: "guess", guess: NaN, playerId }],
     ["anything", { type: "guess", guess: NaN, playerId }],
     ["else", { type: "guess", guess: NaN, playerId }],
     ["is a guess", { type: "guess", guess: NaN, playerId }],

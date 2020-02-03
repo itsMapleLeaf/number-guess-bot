@@ -40,6 +40,10 @@ function run() {
         )
         break
 
+      case "quit":
+        message.channel.createMessage("game has been stopped :(")
+        break
+
       default:
         console.error(`unhandled result ${result}`)
         break
