@@ -1,5 +1,5 @@
 dependencies:
-  '@crawron/griffon': 0.0.3_eris@0.11.2
+  '@crawron/griffon': 0.0.4_eris@0.11.2
   dotenv: 8.2.0
   eris: 0.11.2
 devDependencies:
@@ -157,15 +157,15 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-r5160ogAvGyHsal38Kux7YYtodEKOj89RGb28ht1jh3SJb08VwRwAKKJL0bGb04Zd/3r9FL3BFIc3bBidYffCA==
-  /@crawron/griffon/0.0.3_eris@0.11.2:
+  /@crawron/griffon/0.0.4_eris@0.11.2:
     dependencies:
       eris: 0.11.2
     dev: false
     peerDependencies:
       eris: ^0.11.2
     resolution:
-      integrity: sha512-6rJbiWlH5u2IGAMayFzXrK3uagBxDlOQmQ4/6s8svTEzjdchhJY1F9/6Gopaz9/ssuDoLEJSxVJybQy6nKKNGQ==
-      tarball: download/@crawron/griffon/0.0.3/66201beb8ecf616a8c18cd8304be0c46a7b63a039cd2e5dd1c1888714844fc68
+      integrity: sha512-5wjqAZHfgVkrb2d0XvuQwU0+meq5VBw5GMQA4zuHnhycNzEZQcgdfk3DIymbGSTEd8dzQOin6Q98Nr5xFOTDSQ==
+      tarball: download/@crawron/griffon/0.0.4/0bc843adb4cae8f324b6518275303de282ceca6a305cace6972fe3864ed420a3
   /@istanbuljs/load-nyc-config/1.0.0:
     dependencies:
       camelcase: 5.3.1
@@ -4105,7 +4105,7 @@ packages:
     resolution:
       integrity: sha512-Ux4ygGWsu2c7isFWe8Yu1YluJmqVhxqK2cLXNQA5AcC3QfbGNpM7fu0Y8b/z16pXLnFxZYvWhd3fhBY9DLmC6Q==
 specifiers:
-  '@crawron/griffon': ^0.0.3
+  '@crawron/griffon': ^0.0.4
   '@types/jest': ^25.1.1
   '@types/node': ^13.7.0
   dotenv: ^8.2.0
